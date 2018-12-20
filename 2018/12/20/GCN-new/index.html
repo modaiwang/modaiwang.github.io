@@ -106,8 +106,8 @@
 
   <meta name="description" content="tags: 拉普拉斯矩阵  定义：   提取拓扑图特征的两种方式  一个问题：为什么在图像处理中要用傅里叶变换？   傅里叶变换和卷积的推广  1. 傅里叶变换的推广 2.卷积的推广：  卷积定理：     GC图卷积  1. 在第一代GCN中 2. 第二代GCN中 3. Kipf提出的GCN 4. Kipf提出的层级线性模型 Rahimi使用GCN进行Geolocation  数据 打标签 文">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GCN">
-<meta property="og:url" content="https://modaiwang.github.io/2018/12/20/GCN/index.html">
+<meta property="og:title" content="GCN-new">
+<meta property="og:url" content="https://modaiwang.github.io/2018/12/20/GCN-new/index.html">
 <meta property="og:site_name" content="Modai&#39;s Blog">
 <meta property="og:description" content="tags: 拉普拉斯矩阵  定义：   提取拓扑图特征的两种方式  一个问题：为什么在图像处理中要用傅里叶变换？   傅里叶变换和卷积的推广  1. 傅里叶变换的推广 2.卷积的推广：  卷积定理：     GC图卷积  1. 在第一代GCN中 2. 第二代GCN中 3. Kipf提出的GCN 4. Kipf提出的层级线性模型 Rahimi使用GCN进行Geolocation  数据 打标签 文">
 <meta property="og:locale" content="zh">
@@ -117,9 +117,9 @@
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/20/FDOrN9.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/20/FDv3Ae.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/20/FrFrUP.png">
-<meta property="og:updated_time" content="2018-12-20T15:28:00.464Z">
+<meta property="og:updated_time" content="2018-12-20T15:33:43.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GCN">
+<meta name="twitter:title" content="GCN-new">
 <meta name="twitter:description" content="tags: 拉普拉斯矩阵  定义：   提取拓扑图特征的两种方式  一个问题：为什么在图像处理中要用傅里叶变换？   傅里叶变换和卷积的推广  1. 傅里叶变换的推广 2.卷积的推广：  卷积定理：     GC图卷积  1. 在第一代GCN中 2. 第二代GCN中 3. Kipf提出的GCN 4. Kipf提出的层级线性模型 Rahimi使用GCN进行Geolocation  数据 打标签 文">
 <meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-5f756da1ce39f38d408bd771a15c8ad3_hd.jpg">
 
@@ -128,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="https://modaiwang.github.io/2018/12/20/GCN/">
+  <link rel="canonical" href="https://modaiwang.github.io/2018/12/20/GCN-new/">
 
 
 
@@ -138,7 +138,7 @@
   };
 </script>
 
-  <title>GCN | Modai's Blog</title>
+  <title>GCN-new | Modai's Blog</title>
   
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://modaiwang.github.io/2018/12/20/GCN/">
+    <link itemprop="mainEntityOfPage" href="https://modaiwang.github.io/2018/12/20/GCN-new/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Modai wang">
@@ -319,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">GCN
+          <h1 class="post-title" itemprop="name headline">GCN-new
 
               
             
@@ -345,7 +345,7 @@
                 
               
 
-              <time title="Post created: 12th,20 of 2018 23:26:27 / Updated at: 23:28:00" itemprop="dateCreated datePublished" datetime="2018-12-20T23:26:27+08:00">12th,20 of 2018</time>
+              <time title="Post created: 12th,20 of 2018 23:33:17 / Updated at: 23:33:43" itemprop="dateCreated datePublished" datetime="2018-12-20T23:33:17+08:00">12th,20 of 2018</time>
             
 
             
@@ -430,7 +430,6 @@
 <li>GCN的几个版本</li>
 <li>tensorflow实现</li>
 </ul>
-<p>&lt;!-- more --&gt;</p>
 <h2>拉普拉斯矩阵</h2>
 <p>在研究图的信息的时候，为了表示图，经常会使用到的一个矩阵，即为拉普拉斯矩阵，通过这一矩阵，可以找到很多游泳的性质，比如：探究给定图的生成树个数，构造低维嵌入，并应用于多种机器学习领域。</p>
 <h3>定义：</h3>
@@ -725,8 +724,8 @@ $$T(\vec{h^l})=\sigma(W^l_t\vec{h^l}+b^l_t)$$</p>
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/11/test/" rel="next" title="test">
-                <i class="fa fa-chevron-left"></i> test
+              <a href="/2018/12/20/GCN/" rel="next" title="GCN">
+                <i class="fa fa-chevron-left"></i> GCN
               </a>
             
           </div>
@@ -734,10 +733,6 @@ $$T(\vec{h^l})=\sigma(W^l_t\vec{h^l}+b^l_t)$$</p>
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/20/GCN-new/" rel="prev" title="GCN-new">
-                GCN-new <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

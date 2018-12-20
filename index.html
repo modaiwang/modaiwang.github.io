@@ -292,6 +292,458 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://modaiwang.github.io/2018/12/20/GCN-new/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Modai wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Modai's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/20/GCN-new/" class="post-title-link" itemprop="https://modaiwang.github.io/index.html">GCN-new</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 12th,20 of 2018 23:33:17 / Updated at: 23:33:43" itemprop="dateCreated datePublished" datetime="2018-12-20T23:33:17+08:00">12th,20 of 2018</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li><a href="#tags">tags:</a></li>
+<li><a href="#%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%9F%A9%E9%98%B5">拉普拉斯矩阵</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89">定义：</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8F%90%E5%8F%96%E6%8B%93%E6%89%91%E5%9B%BE%E7%89%B9%E5%BE%81%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F">提取拓扑图特征的两种方式</a>
+<ul>
+<li><a href="#%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E4%B8%AD%E8%A6%81%E7%94%A8%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2">一个问题：为什么在图像处理中要用傅里叶变换？</a></li>
+</ul>
+</li>
+<li><a href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%92%8C%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%8E%A8%E5%B9%BF">傅里叶变换和卷积的推广</a>
+<ul>
+<li><a href="#1-%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E7%9A%84%E6%8E%A8%E5%B9%BF">1. 傅里叶变换的推广</a></li>
+<li><a href="#2%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%8E%A8%E5%B9%BF">2.卷积的推广：</a>
+<ul>
+<li><a href="#%E5%8D%B7%E7%A7%AF%E5%AE%9A%E7%90%86"><em>卷积定理</em>：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#gc%E5%9B%BE%E5%8D%B7%E7%A7%AF">GC图卷积</a>
+<ul>
+<li><a href="#1-%E5%9C%A8%E7%AC%AC%E4%B8%80%E4%BB%A3gcn%E4%B8%AD">1. 在第一代GCN中</a></li>
+<li><a href="#2-%E7%AC%AC%E4%BA%8C%E4%BB%A3gcn%E4%B8%AD">2. 第二代GCN中</a></li>
+<li><a href="#3-kipf%E6%8F%90%E5%87%BA%E7%9A%84gcn">3. Kipf提出的GCN</a></li>
+<li><a href="#4-kipf%E6%8F%90%E5%87%BA%E7%9A%84%E5%B1%82%E7%BA%A7%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B">4. Kipf提出的层级线性模型</a></li>
+<li><a href="#rahimi%E4%BD%BF%E7%94%A8gcn%E8%BF%9B%E8%A1%8Cgeolocation">Rahimi使用GCN进行Geolocation</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE">数据</a></li>
+<li><a href="#%E6%89%93%E6%A0%87%E7%AD%BE">打标签</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E6%9E%84%E9%80%A0">文本特征构造</a></li>
+<li><a href="#%E5%8F%8B%E8%B0%8A%E5%9B%BE%E7%9A%84%E6%8F%90%E5%8F%96">友谊图的提取</a></li>
+<li><a href="#%E8%AE%AD%E7%BB%83">训练</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>要讲的点：</p>
+<ul>
+<li>拉普拉斯算子&amp;拉普拉斯矩阵</li>
+<li>光谱图卷积，其数学原理</li>
+<li>GCN的几个版本</li>
+<li>tensorflow实现</li>
+</ul>
+<h2>拉普拉斯矩阵</h2>
+<p>在研究图的信息的时候，为了表示图，经常会使用到的一个矩阵，即为拉普拉斯矩阵，通过这一矩阵，可以找到很多游泳的性质，比如：探究给定图的生成树个数，构造低维嵌入，并应用于多种机器学习领域。</p>
+<h3>定义：</h3>
+<p>给定一个图<strong>G</strong>，其上有n个节点，它的拉普拉斯矩阵<strong>L</strong>定义为:
+$$L=D-A$$
+其中，<strong>D</strong>表示图的度矩阵，<strong>A</strong>表示图的邻接矩阵。</p>
+<p><code>eg.</code><a href="https://modai:23456/notebooks/Laplacian%20matrix.ipynb" target="_blank" rel="noopener">见网上的ipynb</a>
+$${\color{Orange} L^{sys}}=D^{-1/2}{\color{Orange} L}D^{-1/2}=E-D^{-1/2}AD^{-1/2}$$
+通过上面的演示，大致可以得知拉普拉斯矩阵的计算过程，但是在具体的使用的时候，一般都会使用对其进行规范化，得到的矩阵叫对称规范化拉普拉斯矩阵(Symmetric normalized Laplacian)。</p>
+<h2>提取拓扑图特征的两种方式</h2>
+<p>在提取拓扑图的空间特征的时候，有两种方式，一种是基于点域（空间域）的，即把每个顶点相邻的邻居节点找出来，然后再通过计算处理这些邻居节点。</p>
+<p>另一种就是就与光谱域的，是希望借助图谱理论来实现拓扑图上的卷积操作，其中图谱理论（Spectral graph theory）简单概括就是借助图的拉普拉斯矩阵的特征值和特征向量来研究图的性质。</p>
+<p>那么为什么要Laplacian matrix？</p>
+<ol>
+<li>拉普拉斯矩阵性质优良：
+<ul>
+<li>对称：一定n个线性无关特征向量
+<ul>
+<li>特征向量可以构成一个正交矩阵</li>
+<li>满足$UU^T=UU^{-1}=E$</li>
+</ul>
+</li>
+<li>半正定矩阵：特征值一定是非负的</li>
+</ul>
+</li>
+<li>拉普拉斯矩阵只在中心顶点和一阶相连的顶点上有非0元素，其余之处均为0。</li>
+<li>拉普拉斯算子和拉普拉斯矩阵的类比</li>
+</ol>
+<h3>一个问题：为什么在图像处理中要用傅里叶变换？</h3>
+<p>图像的频率（空间频率，与一维空间中的时域相对应）是表征图像中灰度变化剧烈程度的指标，是灰度在平面空间上的梯度。</p>
+<p>从纯粹的<strong>数学意义</strong>上看，傅立叶变换是将一个函数转换为一系列周期函数来处理的。从<strong>物理效果</strong>看，傅立叶变换是将图像从空间域转换到频率域，其逆变换是将图像从频率域转换到空间域。换句话说，傅立叶变换的<strong>物理意义</strong>是将图像的灰度分布函数变换为图像的频率分布函数，傅立叶逆变换是将图像的频率分布函数变换为灰度分布函数。</p>
+<p>在频率域上，一些特性比较突出，容易处理，比如：图像平滑，图像锐化，边缘增强，噪声压制，频谱分析，纹理分析等。</p>
+<blockquote>
+<p>上述参见：</p>
+<p>1.<a href="https://wenku.baidu.com/view/2f4cac532379168884868762caaedd3383c4b5b1.html" target="_blank" rel="noopener">傅里叶变换在图像处理中的作用</a></p>
+<p>2.<a href="https://blog.csdn.net/yeler082/article/details/78374818" target="_blank" rel="noopener">图像处理技术上的空间域和空间频率域</a></p>
+</blockquote>
+<h2>傅里叶变换和卷积的推广</h2>
+<h3>1. 傅里叶变换的推广</h3>
+<p>(a)传统的傅里叶变换为（在时域上求积分）：</p>
+<p>$$F(\omega)=\mathcal{F}[f(t)]=\int f(t)e^{-i\omega t}dt$$
+上式即为信号$f(t)$与基函数$e^{-i\omega t}$的积分，其中，$e^{-i\omega t}$是拉普拉斯算子的特征函数。</p>
+<p>特征函数在离散条件下即是特征向量。</p>
+<p>广义上的特征方程为（线性代数&amp;高等代数）：
+$$\mathcal{A}V=\lambda V$$</p>
+<p>其中，$\mathcal{A}$是一种变换,$V$是特征向量（或者特征函数），$\lambda$为特征值。</p>
+<p>当使用拉普拉斯算子作为变换，并使用对应的特征函数时：</p>
+<p>$$\Delta e^{-i\omega t} = \frac{\partial ^2}{\partial t^2}e^{-i\omega t}=-\omega^2e^{-i\omega t}$$
+这里的$-\omega^2$就是其特征值</p>
+<hr>
+<p>以上连续变量下，使用的拉普拉斯算子的特征方程是连续的。</p>
+<p>当要对离散变量运用拉普拉斯算子的时候，就需要使用离散的拉普拉斯算子，即<strong>拉普拉斯矩阵</strong></p>
+<p>这里对Laplacian matrix求其特征向量，仍遵循上述的过程：
+$$\mathcal{L}V_l=\lambda_l V_l$$</p>
+<p>$\mathcal{L}$表示离散的拉普拉斯算子，这里求得的特征向量$V_l$，为在特征值$\lambda_l$下的特征向量，即：
+$$V_l=\begin{pmatrix}
+u_l(1)\u_l(2)\\vdots\u_l(N)
+\end{pmatrix}$$</p>
+<p>由特征向量可以组成
+$$U=\begin{pmatrix}
+V_1 ,V_2,&amp;\cdots,&amp;V_N
+\end{pmatrix}$$</p>
+<p>将矩阵带入即为：</p>
+<p>$$LU=L\begin{pmatrix}
+V_1 ,V_2,&amp;\cdots,&amp;V_N
+\end{pmatrix}=\begin{pmatrix}
+\lambda_1 V_1 ,\lambda_2 V_2,&amp;\cdots,&amp;\lambda_N V_N
+\end{pmatrix}=U\Lambda $$</p>
+<p>可以得到：
+$$L=U\Lambda U^{-1}=U\Lambda U^T$$</p>
+<p>在离散条件下的积分就是一种内积形式，即：
+$$\mathcal{F}(\lambda_l)=\hat{f}(\lambda_l)=\sum^{N}_{i=1}f(i)u^*_l(i)$$</p>
+<blockquote>
+<p>上述的内积是定义在复数空间上的，即复内积空间（酉空间），在其上定义的内积为：
+$&lt;\vec{x},\vec{y}&gt;=\sum_i x_i y^*_i$</p>
+</blockquote>
+<p>这里的f表示图上的N维向量，其与图中的顶点一一对应，利用矩阵乘法将图上的傅里叶变换（拉普拉斯变换）推广到矩阵形式：</p>
+<p>$$\begin{pmatrix}
+\hat{f}(\lambda_1)\
+\hat{f}(\lambda_2)\
+\vdots\
+\hat{f}(\lambda_N)
+\end{pmatrix}=
+\begin{pmatrix}
+u_1(1) &amp; u_1(2) &amp; \cdots &amp; u_1(N)\
+u_2(1) &amp; u_2(2) &amp; \cdots &amp; u_2(N)\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>
+u_N(1) &amp; u_N(2) &amp; \cdots &amp; u_N(N)
+\end{pmatrix}\begin{pmatrix}
+f(1)\
+f(2)\
+\vdots\
+f(N)
+\end{pmatrix}$$</p>
+<p>将$U=\begin{pmatrix}
+V_1 &amp;V_2&amp;\cdots&amp;V_N
+\end{pmatrix}$带入，得到：</p>
+<p>$\hat{f}=U^T f$</p>
+<p>以上即是图的傅里叶变换，总结起来，就是左乘一个拉普拉斯矩阵的特征矩阵的转置。</p>
+<p>(b)传统的傅里叶逆变换（在频域上求积分）：</p>
+<p>$$\mathcal{F}^{-1}[F(\omega)]=\frac{1}{2\Pi}\int F(\omega)e^{i\omega t}d\omega$$</p>
+<p>同上，迁移到离散的情况下：
+$$f(i)=\sum^{N}_{i=1}\hat{f}(\lambda_l)u_l(i)$$</p>
+<p>转换为矩阵形式：</p>
+<p>$$\begin{pmatrix}
+f(1)\
+f(2)\
+\vdots\
+f(N)
+\end{pmatrix}=
+\begin{pmatrix}
+u_1(1) &amp; u_2(1) &amp; \cdots &amp; u_N(1)\
+u_1(2) &amp; u_2(2) &amp; \cdots &amp; u_N(2)\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>
+u_1(N) &amp; u_2(N) &amp; \cdots &amp; u_N(N)
+\end{pmatrix}\begin{pmatrix}
+\hat{f}(\lambda_1)\
+\hat{f}(\lambda_2)\
+\vdots\
+\hat{f}(\lambda_N)
+\end{pmatrix}$$</p>
+<p>即：$f=U\hat{f}$</p>
+<h3>2.卷积的推广：</h3>
+<h4><em>卷积定理</em>：</h4>
+<p>时域内的卷积对应频域内的乘积，频域内的乘积对应时域内的乘积。</p>
+<p>$$\mathcal{F}(f(t)<em>h(t))=\mathcal{F}(f(t))</em>\mathcal{F}(h((t))$$</p>
+<blockquote>
+<p>参见：</p>
+<p><a href="https://baike.baidu.com/item/%E5%8D%B7%E7%A7%AF%E5%AE%9A%E7%90%86/10440902?fr=aladdin" target="_blank" rel="noopener">卷积定理</a></p>
+</blockquote>
+<p>由于卷积定理的存在，我们就可以在频域上进行卷积运算了。</p>
+<p>其过程可以简述为：对函数$f(t)$和函数$h(t)$的卷积，可以通过其函数的傅里叶变换的乘积的逆变换得到。</p>
+<p>公式表述为：</p>
+<p>$$f*h=\mathcal{F}^{-1}[\hat{f}(\omega)\hat{h}(\omega)]=\frac{1}{2\Pi}\int \hat{f}(\omega)\hat{h}(\omega)e^{i\omega t}d\omega$$</p>
+<p>将离散条件下（Graph中）的傅里叶变换带入，可得：
+$$(f*h)_G=\mathcal{F}^{-1}[\hat{f}(\omega)\hat{h}(\omega)]=U((U^T f)\odot (U^T h))$$</p>
+<p>上式中$\odot$，是哈达马积，简单来说就是对应元素的乘积，显然满足交换律。</p>
+<pre><code>拉普拉斯矩阵的特征向量由于其是n个线性无关的正交向量，所以可以作为傅里叶变换的基，并且还是一组正交基。（可不谈）
+</code></pre>
+<h2>GC图卷积</h2>
+<p>上面讲了这么多，无非就是为了引入下面的图卷积的定义：</p>
+<p>为了方便描述，这里把之前推导出的卷积拿了出来：
+$$(f*h)_G=U((U^T h)\odot (U^T f))=U\begin{pmatrix}
+\hat{h}(\lambda_1)&amp; &amp; &amp;\
+&amp;\hat{h}(\lambda_1) &amp; &amp;\
+&amp; &amp; \ddots&amp;\
+&amp; &amp; &amp;\hat{h}(\lambda_N)
+\end{pmatrix}U^Tf$$</p>
+<p>在深度学习中，要进行卷积的操作，需要的就是设计一个可以训练的并共享参数的kernel（卷积核），从上式中，可以看到，中间的大型对角阵即是需要确定的卷积核。</p>
+<h3>1. 在第一代<a href="https://arxiv.org/abs/1312.6203" target="_blank" rel="noopener">GCN</a>中</h3>
+<p>直接将这个对角阵通过$diag(\theta_l)$进行了替代，即卷积过程被定义为了:</p>
+<p>$$(f*h)<em>G=g</em>{\theta}\star x=U\begin{pmatrix}
+\theta_1&amp; &amp; &amp;\
+&amp;\theta_2 &amp; &amp;\
+&amp; &amp; \ddots&amp;\
+&amp; &amp; &amp;\theta_N
+\end{pmatrix}U^Tx$$</p>
+<p>则，$y_{output}=\sigma((f*h)_G)$</p>
+<p>该GCN有以下缺点：</p>
+<ul>
+<li>每一次前向传播，都要计算$U,diag(\theta_l),U^T$三者的乘积，对于大规模的图，计算的代价较高，计算复杂度在$\mathcal{O}(n^2)$</li>
+<li>卷积核需要n个参数（节点个数）</li>
+</ul>
+<h3>2. 第二代GCN中</h3>
+<p>作者将$\hat{h}(\lambda_l)$设计为了
+$\sum^K_{j=0}\alpha_j\lambda^j_l$</p>
+<p>即：
+$$(f*h)<em>G=g</em>{\theta}\star x=U\begin{pmatrix}
+\sum^K_{j=0}\alpha_j\lambda^j_1l&amp; &amp; &amp;\
+&amp;\sum^K_{j=0}\alpha_j\lambda^j_2 &amp; &amp;\
+&amp; &amp; \ddots&amp;\
+&amp; &amp; &amp;\sum^K_{j=0}\alpha_j\lambda^j_N
+\end{pmatrix}U^Tx$$</p>
+<p>上式可变换为：</p>
+<p>$$(f*h)<em>G=U\sum^K</em>{j=0}\alpha_j\Lambda^jU^Tx=\sum^K_{j=0}\alpha_jU\Lambda^jU^Tx=\sum^K_{j=0}\alpha_jL^jx$$</p>
+<p>其中的参数为$\alpha_1,\alpha_2,\cdots,\alpha_K$。</p>
+<p>其相较于之前的卷积核的优势在于：</p>
+<ul>
+<li>只有K个参数，generally，K&lt;&lt;N。</li>
+<li>可以看到，拉普拉斯矩阵直接参与前向传播。不需要对其进行特征分解（谱分解），计算复杂度变为了$\mathcal{O}(n)$</li>
+<li>卷积核具有较好的空间定位能力，因为这里的K就是卷积核的一个感受野的度量，i.e. 每次卷积都会将中心顶点的K阶邻域内的特征进行加权求和，权重系数为$\alpha_k$。</li>
+</ul>
+<p>更直观地看，k=1的时候：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-5f756da1ce39f38d408bd771a15c8ad3_hd.jpg" alt="k=1 的graph convolution"></p>
+<p>k=2的时候:
+<img src="https://pic4.zhimg.com/80/v2-a13b82907a364c3707a18bb8572b3a63_hd.jpg" alt="k=2 的graph convolution"></p>
+<h3>3. Kipf提出的GCN</h3>
+<p>作者首先根据2011年的一篇《Wavelets on Graphs via Spectral Graph Theory》对2nd GCN做了修改，论文中，提出使用截断车比雪夫多项式来替代原先的多项式对卷积核进行拟合。
+<img src="https://s1.ax1x.com/2018/12/20/FDoQiV.md.png" alt="车比雪夫多项式和一般多项式"></p>
+<blockquote>
+<p>从图中可以看出，这里截断车比雪夫多项式要比一般的多项式拟合的好，虽然相较于一般的多项式，误差的最大值较大，但是，总体上误差会越来越小，与核函数拟合较好。</p>
+</blockquote>
+<p>通过该替换之后，卷积核变为了：</p>
+<p>$$g_{\theta'}(\Lambda)\approx\sum^{K}_{j=0}\theta'_jT_j(\tilde{\Lambda})$$</p>
+<blockquote>
+<p>chebyshev 多项式：</p>
+<ul>
+<li>递推版本：</li>
+</ul>
+<p>$\left{\begin{matrix}
+T_j(x)=2xT_{j-1}(x)-T_{j-2}(x)\
+T_0=1\
+T_1=x
+\end{matrix}\right.$</p>
+<ul>
+<li>公式版本
+$T_j(x)=cos(j\cdot arccos(x))$</li>
+</ul>
+</blockquote>
+<p>上面的$\tilde{\Lambda}=\frac{2}{\lambda_{max}}\Lambda-I_N$，通过这样的操作，特征值就被放缩至了[-1,1]的区间上。</p>
+<p>带入到卷积过程中：
+$$(f*h)<em>G=U\sum^K</em>{j=0}\theta'<em>jT_j(\tilde{\Lambda})U^Tx=\sum^K</em>{j=0}\theta'<em>jUT_j(\tilde{\Lambda})U^Tx=\sum^K</em>{j=0}\theta'_jT_j(\tilde{L})x$$</p>
+<p>上面个的$\tilde{L}=\frac{2}{\lambda_{max}}L-I_N$</p>
+<h3>4. Kipf提出的层级线性模型</h3>
+<p>从直观的感觉来看，K值如果越高，会导致在局部过拟合的现象，所以作者又在上面的基础上提出了，使用K=1时候的情况，即有：</p>
+<p>$$g_\theta'\star x=\theta'_0x+\theta'_1\tilde{L}x=$$
+$$\theta'_0x+\theta'<em>1(\frac{2}{\lambda</em>{max}}L-I_N)x=$$
+$$\theta'_0x+[\frac{2\theta'<em>1}{\lambda</em>{max}}(I_N-D^{-1/2}AD^{-1/2})]x-\theta'_1I_Nx=$$
+$$\theta'<em>0x-\frac{2\theta'<em>1}{\lambda</em>{max}}D^{-1/2}AD^{-1/2}x+\frac{(2-\lambda</em>{max})\theta'<em>1}{\lambda</em>{max}}I_Nx$$</p>
+<p>这里为了方便计算，将$\lambda_{max}\approx2$带入，将上式化简为了:</p>
+<p>$$\theta'_0x-\theta'_1D^{-1/2}AD^{-1/2}x$$</p>
+<p>之后，令$\theta = \theta'_0=-\theta'_1$</p>
+<p>上式继续化简为：</p>
+<p>$$\theta(I_N+D^{-1/2}AD^{-1/2})x$$
+然后又做了一个renormalization trick：
+$$I_N+D^{-1/2}AD^{-1/2}\rightarrow \tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2}$$</p>
+<p>其中：$\tilde{A}=A+I_N,\tilde{D_{ii}}=\sum_i \tilde{A}_{ij}$</p>
+<p>通过上面的推导之后，得到了最后的卷积规则：</p>
+<p>$$(f*h)_G=\tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2}X\Theta=\hat{A}X\Theta$$</p>
+<p>以两个卷积层为例，其计算规则为：
+$$Z=f(X,A)=softmax(\hat{A}Relu(\hat{A}XW^{(0)})W^{(1)})$$</p>
+<p>简言之，就是通过将$\hat{A}$不断左乘来得到深层网络的结果，同时，该操作会遍历到中心点的更远的邻居节点，k层即为k-hop neighborhood。</p>
+<p>这里有作者实现的各种卷积核的精度：</p>
+<p><img src="https://s1.ax1x.com/2018/12/20/FDOrN9.png" alt="FDOrN9.png"></p>
+<p>可以看出renormalization之后的最好。</p>
+<p>&lt;video id=&quot;kipf&quot; controls=&quot;&quot; preload=&quot;auto&quot; width=600&gt;
+&lt;source id=&quot;mp4&quot; src=&quot;http://tkipf.github.io/graph-convolutional-networks/images/video.mp4&quot; type=&quot;video/mp4&quot;; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;&gt;
+&lt;/video&gt;</p>
+<h3>Rahimi使用GCN进行Geolocation</h3>
+<p><img src="https://s1.ax1x.com/2018/12/20/FDv3Ae.png" alt="FDv3Ae.png"></p>
+<p>该作者，构建了一个带有highway层的GCN，所谓highway层，就是一个&quot;层级门&quot;，是应用在层与层之间的一个门函数，作用类似与RNN中的门函数，只不过RNN中是将其定义在了时间步上，而highway是层间。</p>
+<p>其计算公式：
+$$T(\vec{h^l})=\sigma(W^l_t\vec{h^l}+b^l_t)$$</p>
+<p>$$\vec{h}^{l+1}=\vec{h}^{l+1}\circ T(\vec{h}^{l})+\vec{h}^{l}\circ (1-T(\vec{h}^{l}))$$</p>
+<p>门函数的值是通过对上一层的输出值进行线性计算得到的。</p>
+<p>下一层的输出值即为原值与门控值的点乘和上一层与1-门控值的点乘之和。</p>
+<h4>数据</h4>
+<p>作者使用的数据仍是&lt;uid,lat,long,tweet&gt;四元组。</p>
+<h4>打标签</h4>
+<p>GCN解决的问题是一个分类问题，为了给每条推文打标签，首先使用kdtree对美国地图进行了划分，根据训练集中的坐标分布，将数据分为了129类，并按照每个数据所属的类别进行了打标签的操作。</p>
+<h4>文本特征构造</h4>
+<p>对所有的推文做以下操作：</p>
+<ul>
+<li>去除所有话题，@mention</li>
+<li>使用train集中的推文数据训练一个tfidf模型，之后将train，dev，test中的文本数据转化为一个稀疏向量。</li>
+</ul>
+<p>文本特征的维度为：</p>
+<h4>友谊图的提取</h4>
+<p>这里，作者将train，dev，test集中的所有的推文中的@mention关系提取了出来，然后通过networkx构造了友谊图，并将节点度数大于名人阈值的节点作为名人节点进行了去除，由于tweet中提及的人不一定都在uid中出现，所以在构造完图之后，又将图投影到了uid set中，构造了uid set中的友谊图。</p>
+<h4>训练</h4>
+<p>使用的带有highway层的GCN进行训练，这里以3层GCN为例，隐藏单元个数均为300，dropout为0.5。</p>
+<p>试训练结果如下：</p>
+<p><img src="https://s1.ax1x.com/2018/12/20/FrFrUP.png" alt="FrFrUP.png"></p>
+<p>从train和val的acc可以看出其实已经过拟合了，但是按照Acc@161这个指标来看，达到了60%的准确率，就是说，test集中的样本有60%的预测位置都在实际位置的161km内。误差的中位数和均值都要比之前的标签传播要小，精度高了越2%（但是没有2017年的另一个模型高：62%，不过这个模型使用了用户的时区信息。）</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://modaiwang.github.io/2018/12/20/GCN/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -376,30 +828,37 @@
 
       
         
-          <ul>
+          
+            <ul>
 <li><a href="#tags">tags:</a></li>
-<li><a href="#%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%9F%A9%E9%98%B5">拉普拉斯矩阵</a><ul>
+<li><a href="#%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%9F%A9%E9%98%B5">拉普拉斯矩阵</a>
+<ul>
 <li><a href="#%E5%AE%9A%E4%B9%89">定义：</a></li>
 </ul>
 </li>
-<li><a href="#%E6%8F%90%E5%8F%96%E6%8B%93%E6%89%91%E5%9B%BE%E7%89%B9%E5%BE%81%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F">提取拓扑图特征的两种方式</a><ul>
+<li><a href="#%E6%8F%90%E5%8F%96%E6%8B%93%E6%89%91%E5%9B%BE%E7%89%B9%E5%BE%81%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F">提取拓扑图特征的两种方式</a>
+<ul>
 <li><a href="#%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E4%B8%AD%E8%A6%81%E7%94%A8%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2">一个问题：为什么在图像处理中要用傅里叶变换？</a></li>
 </ul>
 </li>
-<li><a href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%92%8C%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%8E%A8%E5%B9%BF">傅里叶变换和卷积的推广</a><ul>
+<li><a href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%92%8C%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%8E%A8%E5%B9%BF">傅里叶变换和卷积的推广</a>
+<ul>
 <li><a href="#1-%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E7%9A%84%E6%8E%A8%E5%B9%BF">1. 傅里叶变换的推广</a></li>
-<li><a href="#2%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%8E%A8%E5%B9%BF">2.卷积的推广：</a><ul>
+<li><a href="#2%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%8E%A8%E5%B9%BF">2.卷积的推广：</a>
+<ul>
 <li><a href="#%E5%8D%B7%E7%A7%AF%E5%AE%9A%E7%90%86"><em>卷积定理</em>：</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#gc%E5%9B%BE%E5%8D%B7%E7%A7%AF">GC图卷积</a><ul>
+<li><a href="#gc%E5%9B%BE%E5%8D%B7%E7%A7%AF">GC图卷积</a>
+<ul>
 <li><a href="#1-%E5%9C%A8%E7%AC%AC%E4%B8%80%E4%BB%A3gcn%E4%B8%AD">1. 在第一代GCN中</a></li>
 <li><a href="#2-%E7%AC%AC%E4%BA%8C%E4%BB%A3gcn%E4%B8%AD">2. 第二代GCN中</a></li>
 <li><a href="#3-kipf%E6%8F%90%E5%87%BA%E7%9A%84gcn">3. Kipf提出的GCN</a></li>
 <li><a href="#4-kipf%E6%8F%90%E5%87%BA%E7%9A%84%E5%B1%82%E7%BA%A7%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B">4. Kipf提出的层级线性模型</a></li>
-<li><a href="#rahimi%E4%BD%BF%E7%94%A8gcn%E8%BF%9B%E8%A1%8Cgeolocation">Rahimi使用GCN进行Geolocation</a><ul>
+<li><a href="#rahimi%E4%BD%BF%E7%94%A8gcn%E8%BF%9B%E8%A1%8Cgeolocation">Rahimi使用GCN进行Geolocation</a>
+<ul>
 <li><a href="#%E6%95%B0%E6%8D%AE">数据</a></li>
 <li><a href="#%E6%89%93%E6%A0%87%E7%AD%BE">打标签</a></li>
 <li><a href="#%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E6%9E%84%E9%80%A0">文本特征构造</a></li>
@@ -417,15 +876,273 @@
 <li>GCN的几个版本</li>
 <li>tensorflow实现</li>
 </ul>
-          <!--noindex-->
+<p>&lt;!-- more --&gt;</p>
+<h2>拉普拉斯矩阵</h2>
+<p>在研究图的信息的时候，为了表示图，经常会使用到的一个矩阵，即为拉普拉斯矩阵，通过这一矩阵，可以找到很多游泳的性质，比如：探究给定图的生成树个数，构造低维嵌入，并应用于多种机器学习领域。</p>
+<h3>定义：</h3>
+<p>给定一个图<strong>G</strong>，其上有n个节点，它的拉普拉斯矩阵<strong>L</strong>定义为:
+$$L=D-A$$
+其中，<strong>D</strong>表示图的度矩阵，<strong>A</strong>表示图的邻接矩阵。</p>
+<p><code>eg.</code><a href="https://modai:23456/notebooks/Laplacian%20matrix.ipynb" target="_blank" rel="noopener">见网上的ipynb</a>
+$${\color{Orange} L^{sys}}=D^{-1/2}{\color{Orange} L}D^{-1/2}=E-D^{-1/2}AD^{-1/2}$$
+通过上面的演示，大致可以得知拉普拉斯矩阵的计算过程，但是在具体的使用的时候，一般都会使用对其进行规范化，得到的矩阵叫对称规范化拉普拉斯矩阵(Symmetric normalized Laplacian)。</p>
+<h2>提取拓扑图特征的两种方式</h2>
+<p>在提取拓扑图的空间特征的时候，有两种方式，一种是基于点域（空间域）的，即把每个顶点相邻的邻居节点找出来，然后再通过计算处理这些邻居节点。</p>
+<p>另一种就是就与光谱域的，是希望借助图谱理论来实现拓扑图上的卷积操作，其中图谱理论（Spectral graph theory）简单概括就是借助图的拉普拉斯矩阵的特征值和特征向量来研究图的性质。</p>
+<p>那么为什么要Laplacian matrix？</p>
+<ol>
+<li>拉普拉斯矩阵性质优良：
+<ul>
+<li>对称：一定n个线性无关特征向量
+<ul>
+<li>特征向量可以构成一个正交矩阵</li>
+<li>满足$UU^T=UU^{-1}=E$</li>
+</ul>
+</li>
+<li>半正定矩阵：特征值一定是非负的</li>
+</ul>
+</li>
+<li>拉普拉斯矩阵只在中心顶点和一阶相连的顶点上有非0元素，其余之处均为0。</li>
+<li>拉普拉斯算子和拉普拉斯矩阵的类比</li>
+</ol>
+<h3>一个问题：为什么在图像处理中要用傅里叶变换？</h3>
+<p>图像的频率（空间频率，与一维空间中的时域相对应）是表征图像中灰度变化剧烈程度的指标，是灰度在平面空间上的梯度。</p>
+<p>从纯粹的<strong>数学意义</strong>上看，傅立叶变换是将一个函数转换为一系列周期函数来处理的。从<strong>物理效果</strong>看，傅立叶变换是将图像从空间域转换到频率域，其逆变换是将图像从频率域转换到空间域。换句话说，傅立叶变换的<strong>物理意义</strong>是将图像的灰度分布函数变换为图像的频率分布函数，傅立叶逆变换是将图像的频率分布函数变换为灰度分布函数。</p>
+<p>在频率域上，一些特性比较突出，容易处理，比如：图像平滑，图像锐化，边缘增强，噪声压制，频谱分析，纹理分析等。</p>
+<blockquote>
+<p>上述参见：</p>
+<p>1.<a href="https://wenku.baidu.com/view/2f4cac532379168884868762caaedd3383c4b5b1.html" target="_blank" rel="noopener">傅里叶变换在图像处理中的作用</a></p>
+<p>2.<a href="https://blog.csdn.net/yeler082/article/details/78374818" target="_blank" rel="noopener">图像处理技术上的空间域和空间频率域</a></p>
+</blockquote>
+<h2>傅里叶变换和卷积的推广</h2>
+<h3>1. 傅里叶变换的推广</h3>
+<p>(a)传统的傅里叶变换为（在时域上求积分）：</p>
+<p>$$F(\omega)=\mathcal{F}[f(t)]=\int f(t)e^{-i\omega t}dt$$
+上式即为信号$f(t)$与基函数$e^{-i\omega t}$的积分，其中，$e^{-i\omega t}$是拉普拉斯算子的特征函数。</p>
+<p>特征函数在离散条件下即是特征向量。</p>
+<p>广义上的特征方程为（线性代数&amp;高等代数）：
+$$\mathcal{A}V=\lambda V$$</p>
+<p>其中，$\mathcal{A}$是一种变换,$V$是特征向量（或者特征函数），$\lambda$为特征值。</p>
+<p>当使用拉普拉斯算子作为变换，并使用对应的特征函数时：</p>
+<p>$$\Delta e^{-i\omega t} = \frac{\partial ^2}{\partial t^2}e^{-i\omega t}=-\omega^2e^{-i\omega t}$$
+这里的$-\omega^2$就是其特征值</p>
+<hr>
+<p>以上连续变量下，使用的拉普拉斯算子的特征方程是连续的。</p>
+<p>当要对离散变量运用拉普拉斯算子的时候，就需要使用离散的拉普拉斯算子，即<strong>拉普拉斯矩阵</strong></p>
+<p>这里对Laplacian matrix求其特征向量，仍遵循上述的过程：
+$$\mathcal{L}V_l=\lambda_l V_l$$</p>
+<p>$\mathcal{L}$表示离散的拉普拉斯算子，这里求得的特征向量$V_l$，为在特征值$\lambda_l$下的特征向量，即：
+$$V_l=\begin{pmatrix}
+u_l(1)\u_l(2)\\vdots\u_l(N)
+\end{pmatrix}$$</p>
+<p>由特征向量可以组成
+$$U=\begin{pmatrix}
+V_1 ,V_2,&amp;\cdots,&amp;V_N
+\end{pmatrix}$$</p>
+<p>将矩阵带入即为：</p>
+<p>$$LU=L\begin{pmatrix}
+V_1 ,V_2,&amp;\cdots,&amp;V_N
+\end{pmatrix}=\begin{pmatrix}
+\lambda_1 V_1 ,\lambda_2 V_2,&amp;\cdots,&amp;\lambda_N V_N
+\end{pmatrix}=U\Lambda $$</p>
+<p>可以得到：
+$$L=U\Lambda U^{-1}=U\Lambda U^T$$</p>
+<p>在离散条件下的积分就是一种内积形式，即：
+$$\mathcal{F}(\lambda_l)=\hat{f}(\lambda_l)=\sum^{N}_{i=1}f(i)u^*_l(i)$$</p>
+<blockquote>
+<p>上述的内积是定义在复数空间上的，即复内积空间（酉空间），在其上定义的内积为：
+$&lt;\vec{x},\vec{y}&gt;=\sum_i x_i y^*_i$</p>
+</blockquote>
+<p>这里的f表示图上的N维向量，其与图中的顶点一一对应，利用矩阵乘法将图上的傅里叶变换（拉普拉斯变换）推广到矩阵形式：</p>
+<p>$$\begin{pmatrix}
+\hat{f}(\lambda_1)\
+\hat{f}(\lambda_2)\
+\vdots\
+\hat{f}(\lambda_N)
+\end{pmatrix}=
+\begin{pmatrix}
+u_1(1) &amp; u_1(2) &amp; \cdots &amp; u_1(N)\
+u_2(1) &amp; u_2(2) &amp; \cdots &amp; u_2(N)\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>
+u_N(1) &amp; u_N(2) &amp; \cdots &amp; u_N(N)
+\end{pmatrix}\begin{pmatrix}
+f(1)\
+f(2)\
+\vdots\
+f(N)
+\end{pmatrix}$$</p>
+<p>将$U=\begin{pmatrix}
+V_1 &amp;V_2&amp;\cdots&amp;V_N
+\end{pmatrix}$带入，得到：</p>
+<p>$\hat{f}=U^T f$</p>
+<p>以上即是图的傅里叶变换，总结起来，就是左乘一个拉普拉斯矩阵的特征矩阵的转置。</p>
+<p>(b)传统的傅里叶逆变换（在频域上求积分）：</p>
+<p>$$\mathcal{F}^{-1}[F(\omega)]=\frac{1}{2\Pi}\int F(\omega)e^{i\omega t}d\omega$$</p>
+<p>同上，迁移到离散的情况下：
+$$f(i)=\sum^{N}_{i=1}\hat{f}(\lambda_l)u_l(i)$$</p>
+<p>转换为矩阵形式：</p>
+<p>$$\begin{pmatrix}
+f(1)\
+f(2)\
+\vdots\
+f(N)
+\end{pmatrix}=
+\begin{pmatrix}
+u_1(1) &amp; u_2(1) &amp; \cdots &amp; u_N(1)\
+u_1(2) &amp; u_2(2) &amp; \cdots &amp; u_N(2)\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\<br>
+u_1(N) &amp; u_2(N) &amp; \cdots &amp; u_N(N)
+\end{pmatrix}\begin{pmatrix}
+\hat{f}(\lambda_1)\
+\hat{f}(\lambda_2)\
+\vdots\
+\hat{f}(\lambda_N)
+\end{pmatrix}$$</p>
+<p>即：$f=U\hat{f}$</p>
+<h3>2.卷积的推广：</h3>
+<h4><em>卷积定理</em>：</h4>
+<p>时域内的卷积对应频域内的乘积，频域内的乘积对应时域内的乘积。</p>
+<p>$$\mathcal{F}(f(t)<em>h(t))=\mathcal{F}(f(t))</em>\mathcal{F}(h((t))$$</p>
+<blockquote>
+<p>参见：</p>
+<p><a href="https://baike.baidu.com/item/%E5%8D%B7%E7%A7%AF%E5%AE%9A%E7%90%86/10440902?fr=aladdin" target="_blank" rel="noopener">卷积定理</a></p>
+</blockquote>
+<p>由于卷积定理的存在，我们就可以在频域上进行卷积运算了。</p>
+<p>其过程可以简述为：对函数$f(t)$和函数$h(t)$的卷积，可以通过其函数的傅里叶变换的乘积的逆变换得到。</p>
+<p>公式表述为：</p>
+<p>$$f*h=\mathcal{F}^{-1}[\hat{f}(\omega)\hat{h}(\omega)]=\frac{1}{2\Pi}\int \hat{f}(\omega)\hat{h}(\omega)e^{i\omega t}d\omega$$</p>
+<p>将离散条件下（Graph中）的傅里叶变换带入，可得：
+$$(f*h)_G=\mathcal{F}^{-1}[\hat{f}(\omega)\hat{h}(\omega)]=U((U^T f)\odot (U^T h))$$</p>
+<p>上式中$\odot$，是哈达马积，简单来说就是对应元素的乘积，显然满足交换律。</p>
+<pre><code>拉普拉斯矩阵的特征向量由于其是n个线性无关的正交向量，所以可以作为傅里叶变换的基，并且还是一组正交基。（可不谈）
+</code></pre>
+<h2>GC图卷积</h2>
+<p>上面讲了这么多，无非就是为了引入下面的图卷积的定义：</p>
+<p>为了方便描述，这里把之前推导出的卷积拿了出来：
+$$(f*h)_G=U((U^T h)\odot (U^T f))=U\begin{pmatrix}
+\hat{h}(\lambda_1)&amp; &amp; &amp;\
+&amp;\hat{h}(\lambda_1) &amp; &amp;\
+&amp; &amp; \ddots&amp;\
+&amp; &amp; &amp;\hat{h}(\lambda_N)
+\end{pmatrix}U^Tf$$</p>
+<p>在深度学习中，要进行卷积的操作，需要的就是设计一个可以训练的并共享参数的kernel（卷积核），从上式中，可以看到，中间的大型对角阵即是需要确定的卷积核。</p>
+<h3>1. 在第一代<a href="https://arxiv.org/abs/1312.6203" target="_blank" rel="noopener">GCN</a>中</h3>
+<p>直接将这个对角阵通过$diag(\theta_l)$进行了替代，即卷积过程被定义为了:</p>
+<p>$$(f*h)<em>G=g</em>{\theta}\star x=U\begin{pmatrix}
+\theta_1&amp; &amp; &amp;\
+&amp;\theta_2 &amp; &amp;\
+&amp; &amp; \ddots&amp;\
+&amp; &amp; &amp;\theta_N
+\end{pmatrix}U^Tx$$</p>
+<p>则，$y_{output}=\sigma((f*h)_G)$</p>
+<p>该GCN有以下缺点：</p>
+<ul>
+<li>每一次前向传播，都要计算$U,diag(\theta_l),U^T$三者的乘积，对于大规模的图，计算的代价较高，计算复杂度在$\mathcal{O}(n^2)$</li>
+<li>卷积核需要n个参数（节点个数）</li>
+</ul>
+<h3>2. 第二代GCN中</h3>
+<p>作者将$\hat{h}(\lambda_l)$设计为了
+$\sum^K_{j=0}\alpha_j\lambda^j_l$</p>
+<p>即：
+$$(f*h)<em>G=g</em>{\theta}\star x=U\begin{pmatrix}
+\sum^K_{j=0}\alpha_j\lambda^j_1l&amp; &amp; &amp;\
+&amp;\sum^K_{j=0}\alpha_j\lambda^j_2 &amp; &amp;\
+&amp; &amp; \ddots&amp;\
+&amp; &amp; &amp;\sum^K_{j=0}\alpha_j\lambda^j_N
+\end{pmatrix}U^Tx$$</p>
+<p>上式可变换为：</p>
+<p>$$(f*h)<em>G=U\sum^K</em>{j=0}\alpha_j\Lambda^jU^Tx=\sum^K_{j=0}\alpha_jU\Lambda^jU^Tx=\sum^K_{j=0}\alpha_jL^jx$$</p>
+<p>其中的参数为$\alpha_1,\alpha_2,\cdots,\alpha_K$。</p>
+<p>其相较于之前的卷积核的优势在于：</p>
+<ul>
+<li>只有K个参数，generally，K&lt;&lt;N。</li>
+<li>可以看到，拉普拉斯矩阵直接参与前向传播。不需要对其进行特征分解（谱分解），计算复杂度变为了$\mathcal{O}(n)$</li>
+<li>卷积核具有较好的空间定位能力，因为这里的K就是卷积核的一个感受野的度量，i.e. 每次卷积都会将中心顶点的K阶邻域内的特征进行加权求和，权重系数为$\alpha_k$。</li>
+</ul>
+<p>更直观地看，k=1的时候：</p>
+<p><img src="https://pic4.zhimg.com/80/v2-5f756da1ce39f38d408bd771a15c8ad3_hd.jpg" alt="k=1 的graph convolution"></p>
+<p>k=2的时候:
+<img src="https://pic4.zhimg.com/80/v2-a13b82907a364c3707a18bb8572b3a63_hd.jpg" alt="k=2 的graph convolution"></p>
+<h3>3. Kipf提出的GCN</h3>
+<p>作者首先根据2011年的一篇《Wavelets on Graphs via Spectral Graph Theory》对2nd GCN做了修改，论文中，提出使用截断车比雪夫多项式来替代原先的多项式对卷积核进行拟合。
+<img src="https://s1.ax1x.com/2018/12/20/FDoQiV.md.png" alt="车比雪夫多项式和一般多项式"></p>
+<blockquote>
+<p>从图中可以看出，这里截断车比雪夫多项式要比一般的多项式拟合的好，虽然相较于一般的多项式，误差的最大值较大，但是，总体上误差会越来越小，与核函数拟合较好。</p>
+</blockquote>
+<p>通过该替换之后，卷积核变为了：</p>
+<p>$$g_{\theta'}(\Lambda)\approx\sum^{K}_{j=0}\theta'_jT_j(\tilde{\Lambda})$$</p>
+<blockquote>
+<p>chebyshev 多项式：</p>
+<ul>
+<li>递推版本：</li>
+</ul>
+<p>$\left{\begin{matrix}
+T_j(x)=2xT_{j-1}(x)-T_{j-2}(x)\
+T_0=1\
+T_1=x
+\end{matrix}\right.$</p>
+<ul>
+<li>公式版本
+$T_j(x)=cos(j\cdot arccos(x))$</li>
+</ul>
+</blockquote>
+<p>上面的$\tilde{\Lambda}=\frac{2}{\lambda_{max}}\Lambda-I_N$，通过这样的操作，特征值就被放缩至了[-1,1]的区间上。</p>
+<p>带入到卷积过程中：
+$$(f*h)<em>G=U\sum^K</em>{j=0}\theta'<em>jT_j(\tilde{\Lambda})U^Tx=\sum^K</em>{j=0}\theta'<em>jUT_j(\tilde{\Lambda})U^Tx=\sum^K</em>{j=0}\theta'_jT_j(\tilde{L})x$$</p>
+<p>上面个的$\tilde{L}=\frac{2}{\lambda_{max}}L-I_N$</p>
+<h3>4. Kipf提出的层级线性模型</h3>
+<p>从直观的感觉来看，K值如果越高，会导致在局部过拟合的现象，所以作者又在上面的基础上提出了，使用K=1时候的情况，即有：</p>
+<p>$$g_\theta'\star x=\theta'_0x+\theta'_1\tilde{L}x=$$
+$$\theta'_0x+\theta'<em>1(\frac{2}{\lambda</em>{max}}L-I_N)x=$$
+$$\theta'_0x+[\frac{2\theta'<em>1}{\lambda</em>{max}}(I_N-D^{-1/2}AD^{-1/2})]x-\theta'_1I_Nx=$$
+$$\theta'<em>0x-\frac{2\theta'<em>1}{\lambda</em>{max}}D^{-1/2}AD^{-1/2}x+\frac{(2-\lambda</em>{max})\theta'<em>1}{\lambda</em>{max}}I_Nx$$</p>
+<p>这里为了方便计算，将$\lambda_{max}\approx2$带入，将上式化简为了:</p>
+<p>$$\theta'_0x-\theta'_1D^{-1/2}AD^{-1/2}x$$</p>
+<p>之后，令$\theta = \theta'_0=-\theta'_1$</p>
+<p>上式继续化简为：</p>
+<p>$$\theta(I_N+D^{-1/2}AD^{-1/2})x$$
+然后又做了一个renormalization trick：
+$$I_N+D^{-1/2}AD^{-1/2}\rightarrow \tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2}$$</p>
+<p>其中：$\tilde{A}=A+I_N,\tilde{D_{ii}}=\sum_i \tilde{A}_{ij}$</p>
+<p>通过上面的推导之后，得到了最后的卷积规则：</p>
+<p>$$(f*h)_G=\tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2}X\Theta=\hat{A}X\Theta$$</p>
+<p>以两个卷积层为例，其计算规则为：
+$$Z=f(X,A)=softmax(\hat{A}Relu(\hat{A}XW^{(0)})W^{(1)})$$</p>
+<p>简言之，就是通过将$\hat{A}$不断左乘来得到深层网络的结果，同时，该操作会遍历到中心点的更远的邻居节点，k层即为k-hop neighborhood。</p>
+<p>这里有作者实现的各种卷积核的精度：</p>
+<p><img src="https://s1.ax1x.com/2018/12/20/FDOrN9.png" alt="FDOrN9.png"></p>
+<p>可以看出renormalization之后的最好。</p>
+<p>&lt;video id=&quot;kipf&quot; controls=&quot;&quot; preload=&quot;auto&quot; width=600&gt;
+&lt;source id=&quot;mp4&quot; src=&quot;http://tkipf.github.io/graph-convolutional-networks/images/video.mp4&quot; type=&quot;video/mp4&quot;; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;&gt;
+&lt;/video&gt;</p>
+<h3>Rahimi使用GCN进行Geolocation</h3>
+<p><img src="https://s1.ax1x.com/2018/12/20/FDv3Ae.png" alt="FDv3Ae.png"></p>
+<p>该作者，构建了一个带有highway层的GCN，所谓highway层，就是一个&quot;层级门&quot;，是应用在层与层之间的一个门函数，作用类似与RNN中的门函数，只不过RNN中是将其定义在了时间步上，而highway是层间。</p>
+<p>其计算公式：
+$$T(\vec{h^l})=\sigma(W^l_t\vec{h^l}+b^l_t)$$</p>
+<p>$$\vec{h}^{l+1}=\vec{h}^{l+1}\circ T(\vec{h}^{l})+\vec{h}^{l}\circ (1-T(\vec{h}^{l}))$$</p>
+<p>门函数的值是通过对上一层的输出值进行线性计算得到的。</p>
+<p>下一层的输出值即为原值与门控值的点乘和上一层与1-门控值的点乘之和。</p>
+<h4>数据</h4>
+<p>作者使用的数据仍是&lt;uid,lat,long,tweet&gt;四元组。</p>
+<h4>打标签</h4>
+<p>GCN解决的问题是一个分类问题，为了给每条推文打标签，首先使用kdtree对美国地图进行了划分，根据训练集中的坐标分布，将数据分为了129类，并按照每个数据所属的类别进行了打标签的操作。</p>
+<h4>文本特征构造</h4>
+<p>对所有的推文做以下操作：</p>
+<ul>
+<li>去除所有话题，@mention</li>
+<li>使用train集中的推文数据训练一个tfidf模型，之后将train，dev，test中的文本数据转化为一个稀疏向量。</li>
+</ul>
+<p>文本特征的维度为：</p>
+<h4>友谊图的提取</h4>
+<p>这里，作者将train，dev，test集中的所有的推文中的@mention关系提取了出来，然后通过networkx构造了友谊图，并将节点度数大于名人阈值的节点作为名人节点进行了去除，由于tweet中提及的人不一定都在uid中出现，所以在构造完图之后，又将图投影到了uid set中，构造了uid set中的友谊图。</p>
+<h4>训练</h4>
+<p>使用的带有highway层的GCN进行训练，这里以3层GCN为例，隐藏单元个数均为300，dropout为0.5。</p>
+<p>试训练结果如下：</p>
+<p><img src="https://s1.ax1x.com/2018/12/20/FrFrUP.png" alt="FrFrUP.png"></p>
+<p>从train和val的acc可以看出其实已经过拟合了，但是按照Acc@161这个指标来看，达到了60%的准确率，就是说，test集中的样本有60%的预测位置都在实际位置的161km内。误差的中位数和均值都要比之前的标签传播要小，精度高了越2%（但是没有2017年的另一个模型高：62%，不过这个模型使用了用户的时区信息。）</p>
+
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/12/20/GCN/#more" rel="contents">
-                Weiterlesen &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
         
       
     </div>
@@ -565,10 +1282,12 @@
       
         
           
-            <h1 id="我的第一次post"><a href="#我的第一次post" class="headerlink" title="我的第一次post"></a>我的第一次post</h1><blockquote>
+            <h1>我的第一次post</h1>
+<blockquote>
 <p>测试发布</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Hello world."</span>)</span><br></pre></td></tr></table></figure>
+<p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Hello world."</span>)</span><br></pre></td></tr></table></figure></p>
+
           
         
       
@@ -706,13 +1425,18 @@
         
           
             <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2>Quick Start</h2>
+<h3>Create a new post</h3>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure></p>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3>Run server</h3>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></p>
 <p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3>Generate static files</h3>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></p>
 <p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3>Deploy to remote sites</h3>
+<p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></p>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           
@@ -798,7 +1522,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

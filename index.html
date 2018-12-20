@@ -292,6 +292,194 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://modaiwang.github.io/2018/12/20/GCN/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Modai wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Modai's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/12/20/GCN/" class="post-title-link" itemprop="https://modaiwang.github.io/index.html">GCN</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Post created: 12th,20 of 2018 23:26:27 / Updated at: 23:28:00" itemprop="dateCreated datePublished" datetime="2018-12-20T23:26:27+08:00">12th,20 of 2018</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <ul>
+<li><a href="#tags">tags:</a></li>
+<li><a href="#%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%9F%A9%E9%98%B5">拉普拉斯矩阵</a><ul>
+<li><a href="#%E5%AE%9A%E4%B9%89">定义：</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8F%90%E5%8F%96%E6%8B%93%E6%89%91%E5%9B%BE%E7%89%B9%E5%BE%81%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F">提取拓扑图特征的两种方式</a><ul>
+<li><a href="#%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E4%B8%AD%E8%A6%81%E7%94%A8%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2">一个问题：为什么在图像处理中要用傅里叶变换？</a></li>
+</ul>
+</li>
+<li><a href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%92%8C%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%8E%A8%E5%B9%BF">傅里叶变换和卷积的推广</a><ul>
+<li><a href="#1-%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E7%9A%84%E6%8E%A8%E5%B9%BF">1. 傅里叶变换的推广</a></li>
+<li><a href="#2%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%8E%A8%E5%B9%BF">2.卷积的推广：</a><ul>
+<li><a href="#%E5%8D%B7%E7%A7%AF%E5%AE%9A%E7%90%86"><em>卷积定理</em>：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#gc%E5%9B%BE%E5%8D%B7%E7%A7%AF">GC图卷积</a><ul>
+<li><a href="#1-%E5%9C%A8%E7%AC%AC%E4%B8%80%E4%BB%A3gcn%E4%B8%AD">1. 在第一代GCN中</a></li>
+<li><a href="#2-%E7%AC%AC%E4%BA%8C%E4%BB%A3gcn%E4%B8%AD">2. 第二代GCN中</a></li>
+<li><a href="#3-kipf%E6%8F%90%E5%87%BA%E7%9A%84gcn">3. Kipf提出的GCN</a></li>
+<li><a href="#4-kipf%E6%8F%90%E5%87%BA%E7%9A%84%E5%B1%82%E7%BA%A7%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B">4. Kipf提出的层级线性模型</a></li>
+<li><a href="#rahimi%E4%BD%BF%E7%94%A8gcn%E8%BF%9B%E8%A1%8Cgeolocation">Rahimi使用GCN进行Geolocation</a><ul>
+<li><a href="#%E6%95%B0%E6%8D%AE">数据</a></li>
+<li><a href="#%E6%89%93%E6%A0%87%E7%AD%BE">打标签</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E6%9E%84%E9%80%A0">文本特征构造</a></li>
+<li><a href="#%E5%8F%8B%E8%B0%8A%E5%9B%BE%E7%9A%84%E6%8F%90%E5%8F%96">友谊图的提取</a></li>
+<li><a href="#%E8%AE%AD%E7%BB%83">训练</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>要讲的点：</p>
+<ul>
+<li>拉普拉斯算子&amp;拉普拉斯矩阵</li>
+<li>光谱图卷积，其数学原理</li>
+<li>GCN的几个版本</li>
+<li>tensorflow实现</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/12/20/GCN/#more" rel="contents">
+                Weiterlesen &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://modaiwang.github.io/2018/12/11/test/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -610,7 +798,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>

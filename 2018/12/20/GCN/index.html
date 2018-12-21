@@ -104,12 +104,12 @@
 
 
 
-  <meta name="description" content="tags: 拉普拉斯矩阵  定义：   提取拓扑图特征的两种方式  一个问题：为什么在图像处理中要用傅里叶变换？   傅里叶变换和卷积的推广  1. 傅里叶变换的推广 2.卷积的推广：  卷积定理：     GC图卷积  1. 在第一代GCN中 2. 第二代GCN中 3. Kipf提出的GCN 4. Kipf提出的层级线性模型 Rahimi使用GCN进行Geolocation  数据 打标签 文">
+  <meta name="description" content="要讲的点：  拉普拉斯算子&amp;amp;拉普拉斯矩阵 光谱图卷积，其数学原理 GCN的几个版本 tensorflow实现  &amp;lt;!-- more --&amp;gt; 拉普拉斯矩阵 在研究图的信息的时候，为了表示图，经常会使用到的一个矩阵，即为拉普拉斯矩阵，通过这一矩阵，可以找到很多游泳的性质，比如：探究给定图的生成树个数，构造低维嵌入，并应用于多种机器学习领域。 定义： 给定一个图G，其上有n个节点，它">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GCN">
 <meta property="og:url" content="https://modaiwang.github.io/2018/12/20/GCN/index.html">
 <meta property="og:site_name" content="Modai&#39;s Blog">
-<meta property="og:description" content="tags: 拉普拉斯矩阵  定义：   提取拓扑图特征的两种方式  一个问题：为什么在图像处理中要用傅里叶变换？   傅里叶变换和卷积的推广  1. 傅里叶变换的推广 2.卷积的推广：  卷积定理：     GC图卷积  1. 在第一代GCN中 2. 第二代GCN中 3. Kipf提出的GCN 4. Kipf提出的层级线性模型 Rahimi使用GCN进行Geolocation  数据 打标签 文">
+<meta property="og:description" content="要讲的点：  拉普拉斯算子&amp;amp;拉普拉斯矩阵 光谱图卷积，其数学原理 GCN的几个版本 tensorflow实现  &amp;lt;!-- more --&amp;gt; 拉普拉斯矩阵 在研究图的信息的时候，为了表示图，经常会使用到的一个矩阵，即为拉普拉斯矩阵，通过这一矩阵，可以找到很多游泳的性质，比如：探究给定图的生成树个数，构造低维嵌入，并应用于多种机器学习领域。 定义： 给定一个图G，其上有n个节点，它">
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-5f756da1ce39f38d408bd771a15c8ad3_hd.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-a13b82907a364c3707a18bb8572b3a63_hd.jpg">
@@ -117,10 +117,10 @@
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/20/FDOrN9.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/20/FDv3Ae.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/20/FrFrUP.png">
-<meta property="og:updated_time" content="2018-12-20T15:28:00.464Z">
+<meta property="og:updated_time" content="2018-12-21T00:31:59.233Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GCN">
-<meta name="twitter:description" content="tags: 拉普拉斯矩阵  定义：   提取拓扑图特征的两种方式  一个问题：为什么在图像处理中要用傅里叶变换？   傅里叶变换和卷积的推广  1. 傅里叶变换的推广 2.卷积的推广：  卷积定理：     GC图卷积  1. 在第一代GCN中 2. 第二代GCN中 3. Kipf提出的GCN 4. Kipf提出的层级线性模型 Rahimi使用GCN进行Geolocation  数据 打标签 文">
+<meta name="twitter:description" content="要讲的点：  拉普拉斯算子&amp;amp;拉普拉斯矩阵 光谱图卷积，其数学原理 GCN的几个版本 tensorflow实现  &amp;lt;!-- more --&amp;gt; 拉普拉斯矩阵 在研究图的信息的时候，为了表示图，经常会使用到的一个矩阵，即为拉普拉斯矩阵，通过这一矩阵，可以找到很多游泳的性质，比如：探究给定图的生成树个数，构造低维嵌入，并应用于多种机器学习领域。 定义： 给定一个图G，其上有n个节点，它">
 <meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-5f756da1ce39f38d408bd771a15c8ad3_hd.jpg">
 
 
@@ -233,7 +233,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
 
   </li>
         
@@ -250,7 +250,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
 
   </li>
 
@@ -338,19 +338,31 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
 
               
                 
               
 
-              <time title="Created: 12th,20 of 2018 23:26:27 / Modified: 23:28:00" itemprop="dateCreated datePublished" datetime="2018-12-20T23:26:27+08:00">12th,20 of 2018</time>
+              <time title="Post created: 12th,20 of 2018 23:26:27" itemprop="dateCreated datePublished" datetime="2018-12-20T23:26:27+08:00">12th,20 of 2018</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Updated at: 12th,21 of 2018 08:31:59" itemprop="dateModified" datetime="2018-12-21T08:31:59+08:00">12th,21 of 2018</time>
               
             
           </span>
@@ -383,47 +395,7 @@
       
 
       
-        <ul>
-<li><a href="#tags">tags:</a></li>
-<li><a href="#%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%9F%A9%E9%98%B5">拉普拉斯矩阵</a>
-<ul>
-<li><a href="#%E5%AE%9A%E4%B9%89">定义：</a></li>
-</ul>
-</li>
-<li><a href="#%E6%8F%90%E5%8F%96%E6%8B%93%E6%89%91%E5%9B%BE%E7%89%B9%E5%BE%81%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F">提取拓扑图特征的两种方式</a>
-<ul>
-<li><a href="#%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E4%B8%AD%E8%A6%81%E7%94%A8%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2">一个问题：为什么在图像处理中要用傅里叶变换？</a></li>
-</ul>
-</li>
-<li><a href="#%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E5%92%8C%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%8E%A8%E5%B9%BF">傅里叶变换和卷积的推广</a>
-<ul>
-<li><a href="#1-%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E7%9A%84%E6%8E%A8%E5%B9%BF">1. 傅里叶变换的推广</a></li>
-<li><a href="#2%E5%8D%B7%E7%A7%AF%E7%9A%84%E6%8E%A8%E5%B9%BF">2.卷积的推广：</a>
-<ul>
-<li><a href="#%E5%8D%B7%E7%A7%AF%E5%AE%9A%E7%90%86"><em>卷积定理</em>：</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#gc%E5%9B%BE%E5%8D%B7%E7%A7%AF">GC图卷积</a>
-<ul>
-<li><a href="#1-%E5%9C%A8%E7%AC%AC%E4%B8%80%E4%BB%A3gcn%E4%B8%AD">1. 在第一代GCN中</a></li>
-<li><a href="#2-%E7%AC%AC%E4%BA%8C%E4%BB%A3gcn%E4%B8%AD">2. 第二代GCN中</a></li>
-<li><a href="#3-kipf%E6%8F%90%E5%87%BA%E7%9A%84gcn">3. Kipf提出的GCN</a></li>
-<li><a href="#4-kipf%E6%8F%90%E5%87%BA%E7%9A%84%E5%B1%82%E7%BA%A7%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B">4. Kipf提出的层级线性模型</a></li>
-<li><a href="#rahimi%E4%BD%BF%E7%94%A8gcn%E8%BF%9B%E8%A1%8Cgeolocation">Rahimi使用GCN进行Geolocation</a>
-<ul>
-<li><a href="#%E6%95%B0%E6%8D%AE">数据</a></li>
-<li><a href="#%E6%89%93%E6%A0%87%E7%AD%BE">打标签</a></li>
-<li><a href="#%E6%96%87%E6%9C%AC%E7%89%B9%E5%BE%81%E6%9E%84%E9%80%A0">文本特征构造</a></li>
-<li><a href="#%E5%8F%8B%E8%B0%8A%E5%9B%BE%E7%9A%84%E6%8F%90%E5%8F%96">友谊图的提取</a></li>
-<li><a href="#%E8%AE%AD%E7%BB%83">训练</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>要讲的点：</p>
+        <p>要讲的点：</p>
 <ul>
 <li>拉普拉斯算子&amp;拉普拉斯矩阵</li>
 <li>光谱图卷积，其数学原理</li>
@@ -784,10 +756,10 @@ $$T(\vec{h^l})=\sigma(W^l_t\vec{h^l}+b^l_t)$$</p>
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -808,7 +780,7 @@ $$T(\vec{h^l})=\sigma(W^l_t\vec{h^l}+b^l_t)$$</p>
                   <a href="/archives/">
                 
                     <span class="site-state-item-count">4</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-name">Artikel</span>
                   </a>
                 </div>
               
@@ -878,7 +850,7 @@ $$T(\vec{h^l})=\sigma(W^l_t\vec{h^l}+b^l_t)$$</p>
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
@@ -1030,6 +1002,43 @@ $$T(\vec{h^l})=\sigma(W^l_t\vec{h^l}+b^l_t)$$</p>
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+    overflow: auto hidden;
+}
+</style>
+
+    
+  
+
 
   
   

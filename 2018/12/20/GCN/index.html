@@ -104,12 +104,12 @@
 
 
 
-  <meta name="description" content="要讲的点：  拉普拉斯算子&amp;amp;拉普拉斯矩阵 光谱图卷积，其数学原理 GCN的几个版本 tensorflow实现  &amp;lt;!-- more --&amp;gt; 拉普拉斯矩阵 在研究图的信息的时候，为了表示图，经常会使用到的一个矩阵，即为拉普拉斯矩阵，通过这一矩阵，可以找到很多游泳的性质，比如：探究给定图的生成树个数，构造低维嵌入，并应用于多种机器学习领域。 定义： 给定一个图G，其上有n个节点，它">
+  <meta name="description" content="&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; 要讲的点：  拉普拉斯算子&amp;amp;拉普拉斯矩阵 光谱图卷积，其数学原理 GCN的几个版本 tensorflow实">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GCN">
 <meta property="og:url" content="https://modaiwang.github.io/2018/12/20/GCN/index.html">
 <meta property="og:site_name" content="Modai&#39;s Blog">
-<meta property="og:description" content="要讲的点：  拉普拉斯算子&amp;amp;拉普拉斯矩阵 光谱图卷积，其数学原理 GCN的几个版本 tensorflow实现  &amp;lt;!-- more --&amp;gt; 拉普拉斯矩阵 在研究图的信息的时候，为了表示图，经常会使用到的一个矩阵，即为拉普拉斯矩阵，通过这一矩阵，可以找到很多游泳的性质，比如：探究给定图的生成树个数，构造低维嵌入，并应用于多种机器学习领域。 定义： 给定一个图G，其上有n个节点，它">
+<meta property="og:description" content="&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; 要讲的点：  拉普拉斯算子&amp;amp;拉普拉斯矩阵 光谱图卷积，其数学原理 GCN的几个版本 tensorflow实">
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-5f756da1ce39f38d408bd771a15c8ad3_hd.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-a13b82907a364c3707a18bb8572b3a63_hd.jpg">
@@ -117,10 +117,10 @@
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/20/FDOrN9.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/20/FDv3Ae.png">
 <meta property="og:image" content="https://s1.ax1x.com/2018/12/20/FrFrUP.png">
-<meta property="og:updated_time" content="2018-12-21T00:31:59.233Z">
+<meta property="og:updated_time" content="2018-12-21T00:39:04.675Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GCN">
-<meta name="twitter:description" content="要讲的点：  拉普拉斯算子&amp;amp;拉普拉斯矩阵 光谱图卷积，其数学原理 GCN的几个版本 tensorflow实现  &amp;lt;!-- more --&amp;gt; 拉普拉斯矩阵 在研究图的信息的时候，为了表示图，经常会使用到的一个矩阵，即为拉普拉斯矩阵，通过这一矩阵，可以找到很多游泳的性质，比如：探究给定图的生成树个数，构造低维嵌入，并应用于多种机器学习领域。 定义： 给定一个图G，其上有n个节点，它">
+<meta name="twitter:description" content="&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; 要讲的点：  拉普拉斯算子&amp;amp;拉普拉斯矩阵 光谱图卷积，其数学原理 GCN的几个版本 tensorflow实">
 <meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-5f756da1ce39f38d408bd771a15c8ad3_hd.jpg">
 
 
@@ -362,7 +362,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Updated at: 12th,21 of 2018 08:31:59" itemprop="dateModified" datetime="2018-12-21T08:31:59+08:00">12th,21 of 2018</time>
+                <time title="Updated at: 12th,21 of 2018 08:39:04" itemprop="dateModified" datetime="2018-12-21T08:39:04+08:00">12th,21 of 2018</time>
               
             
           </span>
@@ -395,7 +395,8 @@
       
 
       
-        <p>要讲的点：</p>
+        <p>&lt;script type=&quot;text/javascript&quot; src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default&quot;&gt;&lt;/script&gt;</p>
+<p>要讲的点：</p>
 <ul>
 <li>拉普拉斯算子&amp;拉普拉斯矩阵</li>
 <li>光谱图卷积，其数学原理</li>
@@ -1007,36 +1008,6 @@ $$T(\vec{h^l})=\sigma(W^l_t\vec{h^l}+b^l_t)$$</p>
   
   
 
-  
-    
-      <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      },
-      TeX: {equationNumbers: { autoNumber: "AMS" }}
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<style>
-.MathJax_Display {
-    overflow: auto hidden;
-}
-</style>
-
-    
   
 
 
